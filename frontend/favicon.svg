@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="cloudGradient" x1="10" y1="10" x2="54" y2="54" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#23d7ff"/>
+      <stop offset="1" stop-color="#2684ff"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="56" height="56" rx="10" fill="#04101c"/>
+  <path
+    d="M43 42H23a10 10 0 0 1-1.5-19.9A12 12 0 0 1 44 26h1a8 8 0 0 1 0 16z"
+    fill="none"
+    stroke="url(#cloudGradient)"
+    stroke-width="4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path d="M22 47v5M32 42v10M42 47v5" stroke="#23d7ff" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="22" cy="54" r="2" fill="#23d7ff"/>
+  <circle cx="32" cy="54" r="2" fill="#23d7ff"/>
+  <circle cx="42" cy="54" r="2" fill="#23d7ff"/>
+</svg>
