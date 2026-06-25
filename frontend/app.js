@@ -319,8 +319,8 @@ function renderHomePage() {
     return `
         <section class="hero-section">
             <div class="hero-copy">
-                <p class="eyebrow">${escapeHtml(profile.shortTitle)}</p>
                 <h1>${escapeHtml(profile.name)}</h1>
+                <p class="hero-role-title">${escapeHtml(profile.title)}</p>
                 <p class="hero-title">${escapeHtml(profile.headline)}</p>
                 <p class="hero-lede">${escapeHtml(profile.homeIntro)}</p>
                 <div class="action-row">

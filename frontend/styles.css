@@ -288,8 +288,16 @@ img {
     letter-spacing: 0;
 }
 
+.hero-role-title {
+    margin: -0.3rem 0 0;
+    color: var(--cyan);
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    font-weight: 800;
+    line-height: 1.25;
+}
+
 .hero-title {
-    margin: -0.35rem 0 0;
+    margin: -0.15rem 0 0;
     color: var(--text);
     font-size: clamp(1.25rem, 2.2vw, 1.7rem);
     font-weight: 700;
@@ -1859,6 +1867,7 @@ img {
         border-radius: var(--radius);
         background: var(--panel-strong);
         box-shadow: var(--shadow);
+        text-align: center;
         opacity: 0;
         pointer-events: none;
         transform: translateY(-0.35rem);
@@ -1878,7 +1887,7 @@ img {
     }
 
     .topnav-link {
-        justify-content: flex-start;
+        justify-content: center;
         min-width: 0;
         width: 100%;
         border: 1px solid transparent;
@@ -1887,7 +1896,7 @@ img {
     }
 
     .theme-toggle {
-        justify-content: flex-start;
+        justify-content: center;
         min-width: 0;
         width: 100%;
         padding: 0.7rem 0.8rem;
@@ -1954,35 +1963,37 @@ img {
         display: contents;
     }
 
-    .hero-copy .eyebrow {
-        display: none;
-    }
-
     .hero-copy h1 {
         order: 1;
         text-align: center;
     }
 
-    .hero-media {
+    .hero-copy .hero-role-title {
         order: 2;
+        margin: -0.25rem auto 0;
+        text-align: center;
+    }
+
+    .hero-media {
+        order: 3;
         justify-items: center;
     }
 
     .hero-copy .hero-title {
-        order: 3;
+        order: 4;
         max-width: 22rem;
         margin: 0 auto;
         text-align: center;
     }
 
     .hero-copy .hero-lede {
-        order: 4;
+        order: 5;
         margin: 0;
         font-size: 0.98rem;
     }
 
     .hero-copy .action-row {
-        order: 5;
+        order: 6;
     }
 
     .hero-copy h1,
@@ -1994,6 +2005,11 @@ img {
     .hero-title {
         font-size: 1.05rem;
         line-height: 1.35;
+    }
+
+    .hero-role-title {
+        font-size: 1rem;
+        line-height: 1.3;
     }
 
     .section-heading h2 {
