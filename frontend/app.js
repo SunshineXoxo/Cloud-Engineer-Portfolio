@@ -235,6 +235,7 @@ const contactTopics = [
 const appRoot = document.getElementById("root");
 let submitState = { status: "idle", message: "", mailtoUrl: "" };
 let appTheme = getInitialTheme();
+let mobileMenuCleanup = null;
 
 applyTheme(appTheme);
 renderApp();
@@ -254,6 +255,7 @@ function renderApp() {
     `;
 
     bindNavigation();
+    bindMobileMenu();
     bindThemeToggle();
     bindContactForm();
     bindDisabledButtons();
@@ -295,10 +297,10 @@ function renderNavbar(activePageId) {
                     <span>${escapeHtml(profile.shortTitle)}</span>
                 </span>
             </a>
-            <button class="menu-button" type="button" aria-label="Main navigation">
+            <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-navigation">
                 ${icon("menu")}
             </button>
-            <nav class="topnav" aria-label="Main navigation">
+            <nav class="topnav" id="primary-navigation" aria-label="Main navigation">
                 ${routes.map((route) => `
                     <a class="topnav-link ${route.id === activePageId ? "is-active" : ""}" href="${route.path}" data-route>
                         ${escapeHtml(route.label)}
@@ -906,6 +908,54 @@ function bindNavigation() {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
     });
+}
+
+function bindMobileMenu() {
+    const header = document.querySelector(".site-header");
+    const menuButton = document.querySelector(".menu-button");
+
+    if (mobileMenuCleanup) {
+        mobileMenuCleanup();
+        mobileMenuCleanup = null;
+    }
+
+    if (!header || !menuButton) {
+        return;
+    }
+
+    const closeMenu = () => {
+        header.classList.remove("is-menu-open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.setAttribute("aria-label", "Open menu");
+    };
+
+    menuButton.addEventListener("click", () => {
+        const isOpen = header.classList.toggle("is-menu-open");
+        menuButton.setAttribute("aria-expanded", String(isOpen));
+        menuButton.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+    });
+
+    const handleDocumentClick = (event) => {
+        if (!header.classList.contains("is-menu-open") || header.contains(event.target)) {
+            return;
+        }
+
+        closeMenu();
+    };
+
+    const handleDocumentKeydown = (event) => {
+        if (event.key === "Escape") {
+            closeMenu();
+        }
+    };
+
+    document.addEventListener("click", handleDocumentClick);
+    document.addEventListener("keydown", handleDocumentKeydown);
+
+    mobileMenuCleanup = () => {
+        document.removeEventListener("click", handleDocumentClick);
+        document.removeEventListener("keydown", handleDocumentKeydown);
+    };
 }
 
 function bindThemeToggle() {
