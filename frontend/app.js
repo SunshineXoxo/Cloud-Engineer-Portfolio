@@ -214,13 +214,13 @@ const foundationProjects = [
         repoUrl: "https://github.com/SunshineXoxo",
     },
     {
-        title: "Python Automation Practice",
-        language: "Python",
-        status: "Learning lab",
-        description: "Python scripting practice for automation, data processing, and repeatable cloud engineering tasks.",
-        cloudAngle: "Future improvement: run automation tasks as Azure Functions or scheduled cloud jobs.",
-        stack: ["Python", "Automation", "Data processing", "Cloud tasks"],
-        repoUrl: "https://github.com/SunshineXoxo",
+        title: "GenZee E-commerce Web App",
+        language: "Java / React",
+        status: "Phase 1 setup",
+        description: "A Zimbabwe-based social shopping platform for browsing products, saving favourites, building a cart, and sending WhatsApp order requests.",
+        cloudAngle: "Future improvement: deploy the Spring Boot API and Vite storefront with cloud-hosted MySQL, media storage, and monitored environments.",
+        stack: ["React", "Vite", "Spring Boot", "MySQL", "WhatsApp ordering"],
+        repoUrl: "https://github.com/SunshineXoxo/Genzee-Website-e-commerce-full-functional-webapp-",
     },
 ];
 
