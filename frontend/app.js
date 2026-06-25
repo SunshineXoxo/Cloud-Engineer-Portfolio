@@ -2,7 +2,7 @@ const profile = {
     name: "Makanaka Kaguda",
     shortTitle: "Cloud Computing & IoT Student",
     title: "Cloud Computing & IoT Student",
-    headline: "Building practical cloud, IoT, and full-stack projects.",
+    headline: "Cloud Computing & IoT student building practical cloud, IoT, and full-stack projects.",
     supportLine: "I build practical cloud-connected systems using Azure, IoT devices, Python, Java, React, Node.js, and MySQL.",
     homeIntro: "I am a Cloud Computing and Internet of Things student at the University of Zimbabwe with a growing interest in cloud engineering, IoT systems, software development, and practical problem-solving. I enjoy building projects that connect devices, data, and applications, while strengthening my skills in Azure, Python, Java, React, Node.js, and MySQL.",
     intro: "I am a University of Zimbabwe student developing skills in Azure, IoT systems, Python, Java, React, Node.js, and databases.",
@@ -236,6 +236,7 @@ const appRoot = document.getElementById("root");
 let submitState = { status: "idle", message: "", mailtoUrl: "" };
 let appTheme = getInitialTheme();
 let mobileMenuCleanup = null;
+let revealObserver = null;
 
 applyTheme(appTheme);
 renderApp();
@@ -259,6 +260,7 @@ function renderApp() {
     bindThemeToggle();
     bindContactForm();
     bindDisabledButtons();
+    bindScrollReveals();
 }
 
 function getCurrentPageId() {
@@ -291,7 +293,7 @@ function renderNavbar(activePageId) {
     return `
         <header class="site-header">
             <a class="brand" href="/" data-route>
-                <span class="brand-mark" aria-hidden="true">${icon("cloudCircuit")}</span>
+                <span class="brand-mark" aria-hidden="true">MK</span>
                 <span class="brand-copy">
                     <strong>${escapeHtml(profile.name)}</strong>
                     <span>${escapeHtml(profile.shortTitle)}</span>
@@ -322,9 +324,8 @@ function renderHomePage() {
         <section class="hero-section">
             <div class="hero-copy">
                 <h1>${escapeHtml(profile.name)}</h1>
-                <p class="hero-role-title">${escapeHtml(profile.title)}</p>
                 <p class="hero-title">${escapeHtml(profile.headline)}</p>
-                <p class="hero-lede">${escapeHtml(profile.homeIntro)}</p>
+                <p class="hero-location">${escapeHtml(profile.location)}</p>
                 <div class="action-row">
                     ${routeButton("View Projects", "/projects", "folder", "primary")}
                     ${downloadButton("Download CV", profile.cvUrl, "download")}
@@ -891,6 +892,44 @@ function quickInfo(title, text, iconName) {
             <p>${escapeHtml(text)}</p>
         </article>
     `;
+}
+
+function bindScrollReveals() {
+    if (revealObserver) {
+        revealObserver.disconnect();
+        revealObserver = null;
+    }
+
+    const revealItems = document.querySelectorAll(
+        ".content-band, .panel, .foundation-card, .quick-card, .focus-card, .path-step, .cta-band, .notice-band"
+    );
+
+    if (!revealItems.length) {
+        return;
+    }
+
+    revealItems.forEach((item) => item.classList.add("reveal"));
+
+    if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        revealItems.forEach((item) => item.classList.add("visible"));
+        return;
+    }
+
+    revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+                return;
+            }
+
+            entry.target.classList.add("visible");
+            revealObserver.unobserve(entry.target);
+        });
+    }, {
+        rootMargin: "0px 0px -10% 0px",
+        threshold: 0.12,
+    });
+
+    revealItems.forEach((item) => revealObserver.observe(item));
 }
 
 function bindNavigation() {

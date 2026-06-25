@@ -1,9 +1,9 @@
 :root {
-    --bg: #04101c;
-    --bg-2: #071827;
-    --panel: rgba(8, 28, 45, 0.86);
-    --panel-strong: rgba(10, 39, 63, 0.94);
-    --panel-soft: rgba(15, 52, 82, 0.58);
+    --bg: #050c14;
+    --bg-2: #0b1520;
+    --panel: rgba(9, 18, 28, 0.88);
+    --panel-strong: rgba(10, 19, 30, 0.96);
+    --panel-soft: rgba(255, 255, 255, 0.05);
     --text: #f2f7fb;
     --muted: #a9bdd0;
     --quiet: #7891a8;
@@ -58,12 +58,8 @@ body {
     margin: 0;
     min-height: 100vh;
     color: var(--text);
-    font-family: "Segoe UI", Arial, sans-serif;
-    background:
-        linear-gradient(rgba(38, 132, 255, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(38, 132, 255, 0.04) 1px, transparent 1px),
-        linear-gradient(135deg, #020912 0%, #06182a 42%, #031020 100%);
-    background-size: 34px 34px, 34px 34px, auto;
+    font-family: "DM Sans", sans-serif;
+    background: var(--bg);
     overflow-x: hidden;
 }
 
@@ -76,9 +72,7 @@ body::before {
     position: fixed;
     inset: 0;
     pointer-events: none;
-    background:
-        linear-gradient(90deg, rgba(3, 15, 28, 0.94), rgba(3, 15, 28, 0.52), rgba(3, 15, 28, 0.94)),
-        repeating-linear-gradient(0deg, transparent 0 28px, rgba(35, 215, 255, 0.025) 29px 30px);
+    background: none;
     z-index: -1;
 }
 
@@ -110,6 +104,17 @@ svg {
 
 img {
     max-width: 100%;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: none;
 }
 
 .site-shell {
@@ -148,11 +153,14 @@ img {
     justify-content: center;
     width: 3.3rem;
     height: 3.3rem;
-    border: 1px solid var(--border-strong);
+    border: 1px solid var(--border);
     border-radius: var(--radius);
     color: var(--cyan);
-    background: rgba(var(--cyan-rgb), 0.08);
+    background: transparent;
     box-shadow: none;
+    font-family: "DM Serif Display", serif;
+    font-size: 1.25rem;
+    letter-spacing: 0.02em;
 }
 
 .brand-mark svg {
@@ -171,7 +179,7 @@ img {
 }
 
 .brand-copy span {
-    color: var(--cyan);
+    color: var(--muted);
     font-size: 0.85rem;
 }
 
@@ -210,7 +218,7 @@ img {
     border: 1px solid var(--border);
     border-radius: var(--radius);
     background: var(--panel-soft);
-    color: var(--cyan);
+    color: var(--text);
     cursor: pointer;
     transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
 }
@@ -241,7 +249,7 @@ img {
     border: 1px solid var(--border);
     border-radius: var(--radius);
     background: var(--panel-soft);
-    color: var(--cyan);
+    color: var(--text);
     cursor: pointer;
     transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
 }
@@ -249,7 +257,7 @@ img {
 .menu-button:hover,
 .site-header.is-menu-open .menu-button {
     border-color: var(--border-strong);
-    background: rgba(var(--cyan-rgb), 0.1);
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .page-frame {
@@ -270,7 +278,7 @@ img {
 .hero-copy {
     display: grid;
     align-content: center;
-    gap: 1rem;
+    gap: 0.85rem;
 }
 
 .eyebrow,
@@ -280,39 +288,46 @@ img {
     gap: 0.45rem;
     width: fit-content;
     margin: 0;
-    color: var(--cyan);
+    color: var(--muted);
     font-size: 0.82rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
 }
 
+.hero-copy h1,
+.section-heading h2,
+.page-hero h1 {
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
+}
+
 .hero-copy h1 {
     margin: 0;
-    font-size: clamp(2.55rem, 5vw, 4.4rem);
+    font-size: clamp(3rem, 6vw, 5.25rem);
     line-height: 1.02;
     letter-spacing: 0;
 }
 
-.hero-role-title {
-    margin: -0.3rem 0 0;
-    color: var(--cyan);
-    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
-    font-weight: 800;
-    line-height: 1.25;
+.hero-title {
+    max-width: 42rem;
+    margin: 0;
+    color: var(--text);
+    font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+    font-weight: 500;
+    line-height: 1.35;
 }
 
-.hero-title {
-    margin: -0.15rem 0 0;
-    color: var(--text);
-    font-size: clamp(1.25rem, 2.2vw, 1.7rem);
-    font-weight: 700;
-    line-height: 1.28;
+.hero-location {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.98rem;
+    font-weight: 500;
 }
 
 .hero-copy h1 span,
 .page-hero h1 span {
-    color: var(--cyan);
+    color: inherit;
 }
 
 .hero-lede,
@@ -353,8 +368,8 @@ img {
     padding: 0.38rem 0.55rem;
     font-size: 0.82rem;
     font-weight: 700;
-    border-color: rgba(var(--cyan-rgb), 0.34);
-    background: rgba(var(--cyan-rgb), 0.1);
+    border-color: var(--border);
+    background: var(--panel-soft);
     color: var(--text);
 }
 
@@ -387,10 +402,10 @@ img {
     min-width: 10.4rem;
     min-height: 2.85rem;
     padding: 0.72rem 1rem;
-    border: 1px solid var(--blue);
+    border: 1px solid var(--cyan);
     border-radius: var(--radius);
-    background: var(--blue);
-    color: #ffffff;
+    background: var(--cyan);
+    color: #04101c;
     box-shadow: none;
     cursor: pointer;
     transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
@@ -407,15 +422,15 @@ img {
 
 .button.primary,
 .button.primary {
-    background: var(--blue);
-    color: #ffffff;
-    border-color: var(--blue);
+    background: var(--cyan);
+    color: #04101c;
+    border-color: var(--cyan);
 }
 
 .button.secondary {
     background: var(--panel);
-    color: var(--blue);
-    border-color: var(--border-strong);
+    color: var(--text);
+    border-color: var(--border);
     box-shadow: none;
 }
 
@@ -443,7 +458,7 @@ img {
     border: 1px solid var(--border);
     border-radius: var(--radius);
     background: var(--panel);
-    box-shadow: var(--shadow);
+    box-shadow: 14px 14px 0 rgba(255, 255, 255, 0.04), var(--shadow);
     overflow: hidden;
 }
 
@@ -487,10 +502,10 @@ img {
     place-items: center;
     width: 3.2rem;
     height: 3.2rem;
-    border: 1px solid var(--border-strong);
+    border: 1px solid var(--border);
     border-radius: var(--radius);
     background: var(--panel-strong);
-    color: var(--cyan);
+    color: var(--muted);
     box-shadow: 0 12px 32px rgba(var(--blue-rgb), 0.18);
     animation: hangingDrift 4.8s ease-in-out infinite;
 }
@@ -565,9 +580,9 @@ img {
 
 .cloud-shape {
     fill: rgba(8, 37, 65, 0.8);
-    stroke: var(--cyan);
+    stroke: var(--muted);
     stroke-width: 4;
-    filter: drop-shadow(0 0 14px rgba(var(--cyan-rgb), 0.44));
+    filter: none;
 }
 
 .data-line {
@@ -578,8 +593,8 @@ img {
 }
 
 .data-dot {
-    fill: var(--cyan);
-    filter: drop-shadow(0 0 8px rgba(var(--cyan-rgb), 0.8));
+    fill: var(--muted);
+    filter: none;
 }
 
 .cloud-center {
@@ -597,8 +612,8 @@ img {
 .cloud-center svg {
     width: 5.4rem;
     height: 5.4rem;
-    color: var(--cyan);
-    filter: drop-shadow(0 0 16px rgba(var(--cyan-rgb), 0.55));
+    color: var(--muted);
+    filter: none;
 }
 
 .cloud-center span {
@@ -617,7 +632,7 @@ img {
     border: 1px solid var(--border);
     border-radius: var(--radius);
     background: rgba(8, 27, 45, 0.82);
-    color: var(--cyan);
+    color: var(--muted);
     text-align: center;
 }
 
@@ -763,7 +778,7 @@ img {
 .architecture-node svg {
     width: 2rem;
     height: 2rem;
-    color: var(--cyan);
+    color: var(--muted);
 }
 
 .architecture-node:nth-child(3) svg {
@@ -923,7 +938,7 @@ img {
 }
 
 .skill-column h3 svg {
-    color: var(--cyan);
+    color: var(--muted);
 }
 
 .skill-column ul,
@@ -1046,7 +1061,7 @@ img {
 }
 
 .identity-facts svg {
-    color: var(--cyan);
+    color: var(--muted);
 }
 
 .vertical-timeline {
@@ -1069,8 +1084,8 @@ img {
     height: 2.6rem;
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    color: var(--cyan);
-    background: rgba(35, 215, 255, 0.08);
+    color: var(--muted);
+    background: rgba(255, 255, 255, 0.06);
     grid-row: span 2;
 }
 
@@ -1104,7 +1119,7 @@ img {
 .focus-card svg {
     width: 2.35rem;
     height: 2.35rem;
-    color: var(--cyan);
+    color: var(--muted);
 }
 
 .focus-card:nth-child(3n) svg {
@@ -1146,8 +1161,8 @@ img {
     height: 2.8rem;
     border-radius: var(--radius);
     border: 1px solid var(--border);
-    background: rgba(35, 215, 255, 0.08);
-    color: var(--cyan);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--muted);
 }
 
 .stacked-item p {
@@ -1190,7 +1205,7 @@ img {
 }
 
 .notice-band > span {
-    color: var(--cyan);
+    color: var(--muted);
 }
 
 .projects-hero {
@@ -1316,7 +1331,7 @@ img {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    color: var(--cyan);
+    color: var(--text);
 }
 
 .cloud-angle span {
@@ -1363,8 +1378,8 @@ img {
 .journey-point svg {
     width: 2.7rem;
     height: 2.7rem;
-    color: var(--cyan);
-    filter: drop-shadow(0 0 10px rgba(var(--cyan-rgb), 0.5));
+    color: var(--muted);
+    filter: none;
 }
 
 .journey-point:nth-child(2) svg {
@@ -1444,7 +1459,7 @@ img {
     place-items: center;
     width: 4.8rem;
     height: 4.8rem;
-    color: var(--cyan);
+    color: var(--muted);
 }
 
 .cert-card > span svg,
@@ -1459,7 +1474,7 @@ img {
 }
 
 .cert-card strong {
-    color: var(--cyan);
+    color: var(--text);
 }
 
 .current-project-mini p,
@@ -1490,7 +1505,7 @@ img {
 .path-icon svg {
     width: 2.4rem;
     height: 2.4rem;
-    color: var(--cyan);
+    color: var(--muted);
 }
 
 .path-step:nth-child(3) .path-icon svg {
@@ -1524,16 +1539,14 @@ img {
     min-height: 14rem;
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    background:
-        linear-gradient(90deg, transparent, rgba(35, 215, 255, 0.08), transparent),
-        rgba(8, 28, 48, 0.74);
+    background: rgba(8, 28, 48, 0.74);
 }
 
 .contact-signal svg {
     width: 6.5rem;
     height: 6.5rem;
-    color: var(--cyan);
-    filter: drop-shadow(0 0 18px rgba(var(--cyan-rgb), 0.5));
+    color: var(--muted);
+    filter: none;
 }
 
 .contact-form {
@@ -1668,13 +1681,13 @@ img {
     height: 2.55rem;
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    background: rgba(35, 215, 255, 0.08);
-    color: var(--cyan);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--muted);
 }
 
 .contact-item p {
     margin: 0.2rem 0 0;
-    color: var(--cyan);
+    color: var(--text);
 }
 
 .open-card {
@@ -1720,7 +1733,7 @@ img {
 }
 
 .quick-card > span {
-    color: var(--cyan);
+    color: var(--muted);
 }
 
 .quick-card p {
@@ -1753,16 +1766,6 @@ img {
     }
 }
 
-@keyframes portraitFloat {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-8px);
-    }
-}
-
 @keyframes hangingDrift {
     0%,
     100% {
@@ -1770,6 +1773,14 @@ img {
     }
     50% {
         transform: translateY(8px) rotate(1deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
     }
 }
 
@@ -1987,32 +1998,25 @@ img {
         text-align: center;
     }
 
-    .hero-copy .hero-role-title {
-        order: 2;
-        margin: -0.25rem auto 0;
-        text-align: center;
-    }
-
-    .hero-media {
-        order: 3;
-        justify-items: center;
-    }
-
     .hero-copy .hero-title {
-        order: 4;
+        order: 2;
         max-width: 22rem;
         margin: 0 auto;
         text-align: center;
     }
 
-    .hero-copy .hero-lede {
-        order: 5;
-        margin: 0;
-        font-size: 0.98rem;
+    .hero-copy .hero-location {
+        order: 3;
+        text-align: center;
+    }
+
+    .hero-media {
+        order: 4;
+        justify-items: center;
     }
 
     .hero-copy .action-row {
-        order: 6;
+        order: 5;
     }
 
     .hero-copy h1,
@@ -2024,11 +2028,6 @@ img {
     .hero-title {
         font-size: 1.05rem;
         line-height: 1.35;
-    }
-
-    .hero-role-title {
-        font-size: 1rem;
-        line-height: 1.3;
     }
 
     .section-heading h2 {
