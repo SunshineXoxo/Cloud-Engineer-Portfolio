@@ -297,20 +297,22 @@ function renderNavbar(activePageId) {
                     <span>${escapeHtml(profile.shortTitle)}</span>
                 </span>
             </a>
-            <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-navigation">
-                ${icon("menu")}
-            </button>
             <nav class="topnav" id="primary-navigation" aria-label="Main navigation">
                 ${routes.map((route) => `
                     <a class="topnav-link ${route.id === activePageId ? "is-active" : ""}" href="${route.path}" data-route>
                         ${escapeHtml(route.label)}
                     </a>
                 `).join("")}
+            </nav>
+            <div class="header-actions">
                 <button class="theme-toggle" id="theme-toggle" type="button" title="Switch theme" aria-label="Switch between dark and light theme">
                     ${icon(appTheme === "dark" ? "moon" : "sun")}
                     <span>${appTheme === "dark" ? "Dark" : "Light"}</span>
                 </button>
-            </nav>
+                <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-navigation">
+                    ${icon("menu")}
+                </button>
+            </div>
         </header>
     `;
 }

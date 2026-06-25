@@ -183,6 +183,12 @@ img {
     flex-wrap: wrap;
 }
 
+.header-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+}
+
 .topnav-link {
     display: inline-flex;
     align-items: center;
@@ -1849,6 +1855,11 @@ img {
         white-space: nowrap;
     }
 
+    .header-actions {
+        flex: 0 0 auto;
+        gap: 0.45rem;
+    }
+
     .menu-button {
         display: inline-flex;
         flex: 0 0 auto;
@@ -1861,6 +1872,9 @@ img {
         right: max(0.75rem, calc((100vw - var(--content)) / 2 + 0.75rem));
         display: grid;
         gap: 0.35rem;
+        align-items: stretch;
+        justify-content: stretch;
+        justify-items: stretch;
         width: auto;
         padding: 0.55rem;
         border: 1px solid var(--border);
@@ -1896,10 +1910,15 @@ img {
     }
 
     .theme-toggle {
-        justify-content: center;
-        min-width: 0;
-        width: 100%;
-        padding: 0.7rem 0.8rem;
+        width: 2.8rem;
+        height: 2.8rem;
+        min-height: 2.8rem;
+        padding: 0;
+        flex: 0 0 auto;
+    }
+
+    .theme-toggle span {
+        display: none;
     }
 
     .topnav-link:hover,
