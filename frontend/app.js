@@ -4,7 +4,7 @@ const profile = {
     title: "Cloud Computing & IoT Student",
     headline: "Building practical cloud, IoT, and full-stack projects.",
     supportLine: "I build practical cloud-connected systems using Azure, IoT devices, Python, Java, React, Node.js, and MySQL.",
-    homeIntro: "I am a Cloud Computing and Internet of Things student at the University of Zimbabwe with a growing interest in cloud engineering, IoT systems, software development, and practical problem-solving. I enjoy building projects that connect devices, data, and applications, while strengthening my skills in Azure, Python, Java, React, Node.js, and MySQL.",
+    homeIntro: "I'm a Cloud Computing and IoT student at the University of Zimbabwe, building practical Azure and cloud-connected systems. I enjoy turning devices, data, and software into useful projects.",
     intro: "I am a University of Zimbabwe student developing skills in Azure, IoT systems, Python, Java, React, Node.js, and databases.",
     opportunityLine: "I am currently seeking internship opportunities in cloud engineering, IoT platforms, backend development, and related technology roles.",
     location: "Zimbabwe",
@@ -794,11 +794,14 @@ function renderHeroPortrait() {
 
 function renderJourneyGraphic() {
     return `
-        <div class="journey-graphic" aria-label="Cloud learning path illustration">
-            ${learningPath.slice(0, 5).map((item, index) => `
-                <div class="journey-point" style="--i: ${index}">
-                    <span aria-hidden="true">${icon(item.icon)}</span>
-                    <strong>${escapeHtml(item.title)}</strong>
+        <div class="journey-list" aria-label="Cloud learning path">
+            ${learningPath.map((item, index) => `
+                <div class="journey-list-item">
+                    <span>${index + 1}</span>
+                    <div>
+                        <strong>${escapeHtml(item.title)}</strong>
+                        <p>${escapeHtml(item.description)}</p>
+                    </div>
                 </div>
             `).join("")}
         </div>
@@ -1173,7 +1176,7 @@ function renderFooter() {
     return `
         <footer class="footer">
             <p>${escapeHtml(profile.name)} | ${escapeHtml(profile.title)}</p>
-            <p>Building practical cloud, IoT, and full-stack projects from ${escapeHtml(profile.location)}.</p>
+            <p>Made with care in Harare while building practical cloud, IoT, and full-stack projects.</p>
             <p><a href="${escapeAttribute(profile.githubUrl)}" target="_blank" rel="noreferrer">GitHub</a> | <a href="${escapeAttribute(profile.linkedInUrl)}" target="_blank" rel="noreferrer">LinkedIn</a> | <a href="${escapeAttribute(profile.emailUrl)}">Email</a></p>
         </footer>
     `;
@@ -1221,7 +1224,6 @@ function icon(name) {
         pin: `<svg ${attrs}><path d="M12 22s7-5.4 7-12a7 7 0 0 0-14 0c0 6.6 7 12 7 12z"/><circle cx="12" cy="10" r="2"/></svg>`,
         info: `<svg ${attrs}><circle cx="12" cy="12" r="9"/><path d="M12 10v6M12 7h.01"/></svg>`,
         clock: `<svg ${attrs}><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`,
-        cloudCircuit: `<svg ${attrs}><path d="M17.5 18H8a5 5 0 0 1-.9-9.9 6 6 0 0 1 11.5 1.9h.4a4 4 0 0 1 0 8z"/><path d="M7 20v2M12 18v4M17 20v2"/><path d="M7 22h.01M12 22h.01M17 22h.01"/></svg>`,
         cloudLarge: `<svg ${attrs}><path d="M17.5 18H8a5 5 0 0 1-.9-9.9 6 6 0 0 1 11.5 1.9h.4a4 4 0 0 1 0 8z"/><path d="M9 13h.01M12 13h.01M15 13h.01"/></svg>`,
         mailLarge: `<svg ${attrs}><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/><path d="M12 19v3M8 22h8"/></svg>`,
         moon: `<svg ${attrs}><path d="M21 12.7A8.5 8.5 0 1 1 11.3 3a6.5 6.5 0 0 0 9.7 9.7z"/></svg>`,
