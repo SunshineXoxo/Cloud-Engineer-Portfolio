@@ -108,13 +108,55 @@ img {
 
 .reveal {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.55s ease, transform 0.55s ease;
+    transform: translateY(28px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.visible {
     opacity: 1;
     transform: none;
+}
+
+.reveal-children > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-children.visible > *:nth-child(1) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0ms;
+}
+
+.reveal-children.visible > *:nth-child(2) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 80ms;
+}
+
+.reveal-children.visible > *:nth-child(3) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 160ms;
+}
+
+.reveal-children.visible > *:nth-child(4) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 240ms;
+}
+
+.reveal-children.visible > *:nth-child(5) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 320ms;
+}
+
+.reveal-children.visible > *:nth-child(6) {
+    opacity: 1;
+    transform: none;
+    transition-delay: 400ms;
 }
 
 .site-shell {
@@ -297,7 +339,11 @@ img {
 
 .hero-copy h1,
 .section-heading h2,
-.page-hero h1 {
+.page-hero h1,
+.featured-preview h2,
+.panel h2,
+.content-band h2,
+.cta-band h2 {
     font-family: "DM Serif Display", serif;
     font-weight: 400;
 }
@@ -309,6 +355,14 @@ img {
     letter-spacing: 0;
 }
 
+.hero-role-title {
+    margin: -0.3rem 0 0;
+    color: var(--muted);
+    font-size: clamp(1.02rem, 1.6vw, 1.22rem);
+    font-weight: 400;
+    line-height: 1.35;
+}
+
 .hero-title {
     max-width: 42rem;
     margin: 0;
@@ -316,13 +370,6 @@ img {
     font-size: clamp(1.25rem, 2.2vw, 1.65rem);
     font-weight: 500;
     line-height: 1.35;
-}
-
-.hero-location {
-    margin: 0;
-    color: var(--muted);
-    font-size: 0.98rem;
-    font-weight: 500;
 }
 
 .hero-copy h1 span,
@@ -401,14 +448,17 @@ img {
     gap: 0.55rem;
     min-width: 10.4rem;
     min-height: 2.85rem;
-    padding: 0.72rem 1rem;
-    border: 1px solid var(--cyan);
+    padding: 0.72rem 1.25rem;
+    border: 1.5px solid var(--blue);
     border-radius: var(--radius);
-    background: var(--cyan);
-    color: #04101c;
-    box-shadow: none;
+    background: var(--blue);
+    color: #ffffff;
+    font-size: 0.92rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    box-shadow: 0 4px 18px rgba(var(--blue-rgb), 0.22);
     cursor: pointer;
-    transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+    transition: transform 200ms ease, border-color 200ms ease, background 200ms ease, box-shadow 200ms ease;
 }
 
 .hero-copy .action-row .button {
@@ -416,22 +466,34 @@ img {
 }
 
 .button:hover {
-    transform: translateY(-2px);
-    border-color: var(--border-strong);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(var(--blue-rgb), 0.38);
 }
 
 .button.primary,
 .button.primary {
-    background: var(--cyan);
-    color: #04101c;
-    border-color: var(--cyan);
+    background: var(--blue);
+    color: #ffffff;
+    border-color: var(--blue);
+}
+
+.button.primary:hover {
+    background: #1a70e8;
+    border-color: #1a70e8;
 }
 
 .button.secondary {
-    background: var(--panel);
+    background: transparent;
     color: var(--text);
-    border-color: var(--border);
+    border-color: var(--border-strong);
     box-shadow: none;
+}
+
+.button.secondary:hover {
+    background: rgba(var(--cyan-rgb), 0.08);
+    border-color: var(--cyan);
+    color: var(--cyan);
+    box-shadow: 0 4px 18px rgba(var(--cyan-rgb), 0.12);
 }
 
 .button.is-disabled {
@@ -1114,6 +1176,14 @@ img {
     border-radius: var(--radius);
     background: var(--panel-soft);
     text-align: center;
+    cursor: default;
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+
+.focus-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
 }
 
 .focus-card svg {
@@ -1261,6 +1331,13 @@ img {
     border: 1px solid var(--border);
     border-radius: var(--radius);
     background: var(--panel);
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+
+.foundation-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
 }
 
 .foundation-card h3 {
@@ -1776,11 +1853,78 @@ img {
     }
 }
 
+@keyframes heroFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(32px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes heroSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(24px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes heroPop {
+    0% {
+        opacity: 0;
+        transform: scale(0.93);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.hero-copy.animate-in h1 {
+    animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+}
+
+.hero-copy.animate-in .hero-role-title {
+    animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+.hero-copy.animate-in .hero-title {
+    animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.22s both;
+}
+
+.hero-copy.animate-in .hero-lede {
+    animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.hero-copy.animate-in .action-row {
+    animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+.hero-media.animate-in {
+    animation: heroPop 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+}
+
 @media (prefers-reduced-motion: reduce) {
-    .reveal {
+    .reveal,
+    .reveal-children > * {
         opacity: 1;
         transform: none;
         transition: none;
+    }
+
+    .hero-copy.animate-in h1,
+    .hero-copy.animate-in .hero-role-title,
+    .hero-copy.animate-in .hero-title,
+    .hero-copy.animate-in .hero-lede,
+    .hero-copy.animate-in .action-row,
+    .hero-media.animate-in {
+        animation: none;
     }
 }
 
@@ -1998,25 +2142,31 @@ img {
         text-align: center;
     }
 
-    .hero-copy .hero-title {
+    .hero-copy .hero-role-title {
         order: 2;
+        margin: -0.25rem auto 0;
+        text-align: center;
+    }
+
+    .hero-copy .hero-title {
+        order: 3;
         max-width: 22rem;
         margin: 0 auto;
         text-align: center;
     }
 
-    .hero-copy .hero-location {
-        order: 3;
-        text-align: center;
+    .hero-copy .hero-lede {
+        order: 4;
+        margin: 0;
     }
 
     .hero-media {
-        order: 4;
+        order: 5;
         justify-items: center;
     }
 
     .hero-copy .action-row {
-        order: 5;
+        order: 6;
     }
 
     .hero-copy h1,
@@ -2028,6 +2178,11 @@ img {
     .hero-title {
         font-size: 1.05rem;
         line-height: 1.35;
+    }
+
+    .hero-role-title {
+        font-size: 1rem;
+        line-height: 1.3;
     }
 
     .section-heading h2 {

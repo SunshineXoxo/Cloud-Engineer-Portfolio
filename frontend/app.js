@@ -2,7 +2,7 @@ const profile = {
     name: "Makanaka Kaguda",
     shortTitle: "Cloud Computing & IoT Student",
     title: "Cloud Computing & IoT Student",
-    headline: "Cloud Computing & IoT student building practical cloud, IoT, and full-stack projects.",
+    headline: "Building practical cloud, IoT, and full-stack projects.",
     supportLine: "I build practical cloud-connected systems using Azure, IoT devices, Python, Java, React, Node.js, and MySQL.",
     homeIntro: "I am a Cloud Computing and Internet of Things student at the University of Zimbabwe with a growing interest in cloud engineering, IoT systems, software development, and practical problem-solving. I enjoy building projects that connect devices, data, and applications, while strengthening my skills in Azure, Python, Java, React, Node.js, and MySQL.",
     intro: "I am a University of Zimbabwe student developing skills in Azure, IoT systems, Python, Java, React, Node.js, and databases.",
@@ -260,7 +260,10 @@ function renderApp() {
     bindThemeToggle();
     bindContactForm();
     bindDisabledButtons();
-    bindScrollReveals();
+    initScrollReveal();
+    if (pageId === "home") {
+        initHeroAnimation();
+    }
 }
 
 function getCurrentPageId() {
@@ -324,8 +327,9 @@ function renderHomePage() {
         <section class="hero-section">
             <div class="hero-copy">
                 <h1>${escapeHtml(profile.name)}</h1>
+                <p class="hero-role-title">${escapeHtml(profile.title)}</p>
                 <p class="hero-title">${escapeHtml(profile.headline)}</p>
-                <p class="hero-location">${escapeHtml(profile.location)}</p>
+                <p class="hero-lede">${escapeHtml(profile.homeIntro)}</p>
                 <div class="action-row">
                     ${routeButton("View Projects", "/projects", "folder", "primary")}
                     ${downloadButton("Download CV", profile.cvUrl, "download")}
@@ -894,24 +898,31 @@ function quickInfo(title, text, iconName) {
     `;
 }
 
-function bindScrollReveals() {
+function initScrollReveal() {
     if (revealObserver) {
         revealObserver.disconnect();
         revealObserver = null;
     }
 
-    const revealItems = document.querySelectorAll(
-        ".content-band, .panel, .foundation-card, .quick-card, .focus-card, .path-step, .cta-band, .notice-band"
-    );
+    const revealItems = Array.from(document.querySelectorAll(
+        ".content-band, .panel, .section-grid, .cta-band, .notice-band, .page-hero, .split-band, .foundation-card, .path-step, .quick-card, .focus-card"
+    ));
+    const staggerGroups = Array.from(document.querySelectorAll(
+        ".foundation-grid, .skill-grid, .quick-grid, .path-timeline, .focus-grid, .photo-strip, .case-details-grid, .role-grid"
+    ));
+    const targets = Array.from(new Set([...revealItems, ...staggerGroups]));
 
-    if (!revealItems.length) {
+    if (!targets.length) {
         return;
     }
 
     revealItems.forEach((item) => item.classList.add("reveal"));
+    staggerGroups.forEach((item) =>
+        item.classList.add("reveal", "reveal-children")
+    );
 
     if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        revealItems.forEach((item) => item.classList.add("visible"));
+        targets.forEach((item) => item.classList.add("visible"));
         return;
     }
 
@@ -925,11 +936,30 @@ function bindScrollReveals() {
             revealObserver.unobserve(entry.target);
         });
     }, {
-        rootMargin: "0px 0px -10% 0px",
-        threshold: 0.12,
+        threshold: 0.08,
+        rootMargin: "0px 0px -40px 0px",
     });
 
-    revealItems.forEach((item) => revealObserver.observe(item));
+    targets.forEach((item) => revealObserver.observe(item));
+}
+
+function initHeroAnimation() {
+    const heroCopy = document.querySelector(".hero-copy");
+    const heroMedia = document.querySelector(".hero-media");
+
+    if (!heroCopy && !heroMedia) {
+        return;
+    }
+
+    requestAnimationFrame(() => {
+        if (heroCopy) {
+            heroCopy.classList.add("animate-in");
+        }
+
+        if (heroMedia) {
+            heroMedia.classList.add("animate-in");
+        }
+    });
 }
 
 function bindNavigation() {
